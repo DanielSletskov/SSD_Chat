@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSD_Chat", "SSD_Chat\SSD_Chat.csproj", "{BD89BF20-3C48-43C4-8E0E-EA2A96F8A743}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD89BF20-3C48-43C4-8E0E-EA2A96F8A743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD89BF20-3C48-43C4-8E0E-EA2A96F8A743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD89BF20-3C48-43C4-8E0E-EA2A96F8A743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD89BF20-3C48-43C4-8E0E-EA2A96F8A743}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
