@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SSDChat_signalR.props" />
+</Project>
