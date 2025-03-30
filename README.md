@@ -8,6 +8,8 @@ Bonus if your application allows for near real-time communication. It can be ach
 
 I don’t expect the UI to look fancy. A simple unstyled HTML page, plain GUI or CLI/TUI is fine. The only requirement regarding UI is that it should be obvious how to use it.
 
+## User scenario
+Two agents uses the chat for discussing confidential infiltration tactics in a secure web area.  
 
 ## Setup for solution
 
