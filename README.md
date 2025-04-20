@@ -46,10 +46,3 @@ By setting places when is the application fail it will give a specifiv respone i
 6. Controlled Signalr hub connection
 By setting up he chat hub son only a limited amount of people can access and with no harcoded credentials it chech any risk for possible abuse.  
 
-## End notes  
-There are still more which could be done for a better system.  
-The usabile is limited with the lack of chat history
-
-
-
-
