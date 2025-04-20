@@ -46,3 +46,6 @@ By setting places when is the application fail it will give a specifiv respone i
 6. Controlled Signalr hub connection
 By setting up he chat hub son only a limited amount of people can access and with no harcoded credentials it chech any risk for possible abuse.  
 
+## End notes
+
+I know the set is the same but when I try to execute dotnet run without for moving to the specified location I get an error.  
