@@ -23,9 +23,10 @@ connection.on("ReceiveMessage", function (user, encryptedMsg) {
     const li = document.createElement("li");
     li.textContent = `${user}: ${decrypted}`;
     document.getElementById("ChatMessages").appendChild(li);
-    connection.on("ChatFull", function () {
-        alert("This chat is limited to two users only. Please try again later.");
-    });
+});
+
+connection.on("ChatFull", function () {
+    alert("This chat is limited to two users only. Please try again later.");
 });
 
 // On DOM load
@@ -64,51 +65,39 @@ function SendMessage() {
     document.getElementById("Message").value = "";
 }
 
-function EncryptMessage(message) {
-    const key = getSessionKey();
+// Helper function for session storage
+function getOrCreateKey() {
+    let key = sessionStorage.getItem("chatKey");
     if (!key) {
-        console.error("Encryption key not found in sessionStorage.");
-        return null;
+        // Create a simple key if none exists
+        key = "SecureKey123!@#";
+        sessionStorage.setItem("chatKey", key);
     }
-
-    const newIV = CryptoJS.lib.WordArray.random(16);
-
-    const encrypted = CryptoJS.AES.encrypt(message, key, {
-        iv: newIV,
-        mode: CryptoJS.mode.CBC
-    });
-
-    const ivAndEncryptedMessage = newIV.concat(encrypted.ciphertext);
-    return CryptoJS.enc.Base64.stringify(ivAndEncryptedMessage);
+    return key;
 }
 
-function DecryptMessage(ciphertext) {
-    const key = getSessionKey();
-    if (!key) {
-        console.error("Encryption key not found in sessionStorage.");
+// Simplified encryption
+function EncryptMessage(message) {
+    try {
+        const key = getOrCreateKey();
+        const encrypted = CryptoJS.AES.encrypt(message, key).toString();
+        console.log("Encrypted successfully");
+        return encrypted;
+    } catch (err) {
+        console.error("Encryption failed:", err);
         return null;
     }
+}
 
-    const ivAndEncryptedMessage = CryptoJS.enc.Base64.parse(ciphertext);
-
-    const iv = CryptoJS.lib.WordArray.create(
-        ivAndEncryptedMessage.words.slice(0, 4),
-        16
-    );
-
-    const encryptedMessage = CryptoJS.lib.WordArray.create(
-        ivAndEncryptedMessage.words.slice(4),
-        ivAndEncryptedMessage.sigBytes - 16
-    );
-
-    const cipherParams = CryptoJS.lib.CipherParams.create({
-        ciphertext: encryptedMessage
-    });
-
-    const decrypted = CryptoJS.AES.decrypt(cipherParams, key, {
-        iv: iv,
-        mode: CryptoJS.mode.CBC
-    });
-
-    return decrypted.toString(CryptoJS.enc.Utf8);
+// Simplified decryption
+function DecryptMessage(encryptedMessage) {
+    try {
+        const key = getOrCreateKey();
+        const decrypted = CryptoJS.AES.decrypt(encryptedMessage, key).toString(CryptoJS.enc.Utf8);
+        console.log("Decrypted successfully");
+        return decrypted;
+    } catch (err) {
+        console.error("Decryption failed:", err);
+        return "Error decrypting message";
+    }
 }

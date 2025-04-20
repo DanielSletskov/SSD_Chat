@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SSDChat_signalR")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7ae44e3505422b048249d682a0736cdb6eb88dd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a278655e665ef0e0a7cce02f884fd424c08b6c4")]
 [assembly: System.Reflection.AssemblyProductAttribute("SSDChat_signalR")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SSDChat_signalR")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
