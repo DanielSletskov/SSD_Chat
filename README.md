@@ -21,11 +21,34 @@ Two agents uses the chat for discussing confidential infiltration tactics in a s
 ## App in use 
 After the connection is setup use any browser to display the chat.  
 Then connect to the same URL in a new tab.  
-![image](https://github.com/user-attachments/assets/aee75776-db21-4014-b35a-350d16ef519c)
+![image](https://github.com/user-attachments/assets/aee75776-db21-4014-b35a-350d16ef519c)  
 These two windows can now safely chat with eachother.  
-![image](https://github.com/user-attachments/assets/a2964983-01c5-4c77-90b7-e837c68bac78)
+![image](https://github.com/user-attachments/assets/9c1db473-a994-4322-8ded-f863cec27790)  
+  
 
+## What security measures are used in this chat  
+  
+1. AES Encryption
+Each message is encrypted and decrypted using AES encryption in CBC mode(chipher block chaining) to ensure cipher text uniqueness with the use of IV(Initialization Vector). 
 
+2. Dynamic/random IVs
+By using a random IV generator for each message and by the IV being prepended to the ciphertext so a receiver can extract and use it for decryption strengens overall message-encryption.
+ 
+3. Sessions-baed Keys and IV storage
+By using session-based keys it limit possible exposure for XSS attacks.
+
+4. Secure key Fetching
+By fetching encryption key from a secure endpoint and by keeping key delivery spearate from code execution it lessen possible risks.
+
+5. Fallback Loggin setup 
+By setting places when is the application fail it will give a specifiv respone it will ease future reperation of any errors.  
+
+6. Controlled Signalr hub connection
+By setting up he chat hub son only a limited amount of people can access and with no harcoded credentials it chech any risk for possible abuse.  
+
+## End notes  
+There are still more which could be done for a better system.  
+The usabile is limited with the lack of chat history
 
 
 
