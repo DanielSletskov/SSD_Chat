@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UUef/lvLrFGq0GBK/Mn8lCeWzlFGqNLVXLmDY4CmezA=",
+  "Hash": "ZC8OOG0E37f3RcC8vuprbyrqVGamMaePDzLOS1dZ7lQ=",
   "Source": "SSDChat_signalR",
   "BasePath": "_content/SSDChat_signalR",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\js\\Chat.js",
+      "SourceId": "SSDChat_signalR",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\",
+      "BasePath": "_content/SSDChat_signalR",
+      "RelativePath": "js/Chat.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Chat.js"
     },
     {
       "Identity": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\js\\site.js",

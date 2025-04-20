@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\js\\Chat.js",
+      "PackagePath": "staticwebassets\\js\\Chat.js"
+    },
+    {
       "Id": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
