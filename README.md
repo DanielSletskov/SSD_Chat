@@ -1,12 +1,15 @@
 # Solution to sercure chat
 
-## Scope coppied from project discription.
+## Scope  
+(coppied from project discription)  
 Your solution should allow two-people to communicate with each other without the risk of eavesdropping. Group chats, where more than two people send/receive messages at a time, is out scope.
 
 Bonus if your application allows for near real-time communication. It can be achieved with WebSocket, socket.io, SignalR, TCP-socket, using a message queue or so on.
 
 I don’t expect the UI to look fancy. A simple unstyled HTML page, plain GUI or CLI/TUI is fine. The only requirement regarding UI is that it should be obvious how to use it.
 
+## User scenario
+Two agents uses the chat for discussing confidential infiltration tactics in a secure web area.  
 
 ## Setup for solution
 
