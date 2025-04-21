@@ -18,15 +18,16 @@ const connection = new signalR.HubConnectionBuilder()
 
 // SignalR receive handler
 connection.on("ReceiveMessage", function (user, encryptedMsg) {
-    console.log("Received message");
+    console.log("Received message: encryptedMsg", encryptedMsg);
     const decrypted = DecryptMessage(encryptedMsg);
+    console.log("reveice decrypted is" + decrypted);
     const li = document.createElement("li");
     li.textContent = `${user}: ${decrypted}`;
     document.getElementById("ChatMessages").appendChild(li);
 });
 
 connection.on("ChatFull", function () {
-    alert("This chat is limited to two users only. Please try again later.");
+    alert("This chat full. Please try again later.");
 });
 
 // On DOM load
@@ -41,14 +42,41 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// Generate a cryptographically strong random key
+function generateRandomKey(length = 32) {
+    const randomValues = new Uint8Array(length);
+    window.crypto.getRandomValues(randomValues);
+    return Array.from(randomValues)
+        .map(byte => byte.toString(16).padStart(2, '0'))
+        .join('');
+}
+
+// KDF function to derive a stronger key
+function deriveKey(baseKey, salt = "ChatSalt123") {
+    // PBKDF2 with 1000 iterations and 256-bit key
+    const key = CryptoJS.PBKDF2(
+        baseKey,
+        salt,
+        {
+            keySize: 256/32,  // 256 bits
+            iterations: 1000,
+            hasher: CryptoJS.algo.SHA256
+        }
+    );
+
+    return CryptoJS.enc.Base64.stringify(key);
+}
+
 // Fetch encryption config and store in sessionStorage
 async function initializeEncryption() {
     try {
         const response = await fetch('/api/Encryption/getEncryptionConfig');
         const encryptionConfig = await response.json();
 
-        setSessionKey(encryptionConfig.key);
-        setSessionIV(encryptionConfig.iv); // Optional if you're using dynamic IVs
+        // Use KDF to derive a stronger key from the provided key
+        const derivedKey = deriveKey(encryptionConfig.key);
+        setSessionKey(derivedKey);
+        setSessionIV(encryptionConfig.iv);
 
         return true;
     } catch (error) {
@@ -65,23 +93,27 @@ function SendMessage() {
     document.getElementById("Message").value = "";
 }
 
-// Helper function for session storage
+// Helper function for session storage - now using random key generation
 function getOrCreateKey() {
     let key = sessionStorage.getItem("chatKey");
     if (!key) {
-        // Create a simple key if none exists
-        key = "SecureKey123!@#";
+        // Generate a random base key
+        const randomBaseKey = generateRandomKey();
+        // Apply KDF to further strengthen the random key
+        key = deriveKey(randomBaseKey);
+        // Store the derived key
         sessionStorage.setItem("chatKey", key);
     }
     return key;
 }
 
-// Simplified encryption
+// Enhanced encryption
 function EncryptMessage(message) {
     try {
-        const key = getOrCreateKey();
-        const encrypted = CryptoJS.AES.encrypt(message, key).toString();
-        console.log("Encrypted successfully");
+        const key = getSessionKey();
+        const iv = CryptoJS.enc.Base64.parse(sessionStorage.getItem("encryptionIV"));
+        const encrypted = CryptoJS.AES.encrypt(message, key, { iv: iv }).toString();
+        console.log(encrypted);
         return encrypted;
     } catch (err) {
         console.error("Encryption failed:", err);
@@ -89,15 +121,32 @@ function EncryptMessage(message) {
     }
 }
 
-// Simplified decryption
 function DecryptMessage(encryptedMessage) {
+    console.log("encrypted message is:", encryptedMessage);
     try {
-        const key = getOrCreateKey();
-        const decrypted = CryptoJS.AES.decrypt(encryptedMessage, key).toString(CryptoJS.enc.Utf8);
-        console.log("Decrypted successfully");
-        return decrypted;
+        const keyStr = sessionStorage.getItem("encryptionKey");
+        console.log("Raw key string from storage:", keyStr);
+
+        const key = getSessionKey();
+        console.log("Parsed key:", key);
+
+        const ivStr = sessionStorage.getItem("encryptionIV");
+        console.log("Raw IV string from storage:", ivStr);
+
+        const iv = CryptoJS.enc.Base64.parse(ivStr);
+        console.log("Parsed IV:", iv);
+
+        // Decrypt in separate steps to identify where it fails
+        const decryptedBytes = CryptoJS.AES.decrypt(encryptedMessage, key, { iv: iv });
+        console.log("Decrypted bytes:", decryptedBytes);
+
+        const decryptedStr = decryptedBytes.toString(CryptoJS.enc.Utf8);
+        console.log("Decrypted message:", decryptedStr);
+
+        return decryptedStr;
+        
     } catch (err) {
         console.error("Decryption failed:", err);
-        return "Error decrypting message";
+        return "Error decrypting message: " + err.message;
     }
 }

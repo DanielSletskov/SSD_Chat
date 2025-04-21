@@ -7,27 +7,44 @@ namespace SSDChat_signalR.Controllers;
 [Route("api/[controller]")]
 public class EncryptionController : ControllerBase
 { 
-    [HttpGet("getEncryptionConfig")] 
-    public IActionResult GetEncryptionConfig() 
+// Shared static variables (persist during app lifetime)
+    private static string _sharedKey;
+    private static string _sharedIV;
+    private static readonly object _lock = new object(); // For thread safety
+
+    [HttpGet("getEncryptionConfig")]
+    public IActionResult GetEncryptionConfig()
     {
-        try 
-        { 
-            // Generate encryption key and IV (in production, consider more secure methods)
-            using (var aes = Aes.Create()) 
-            { 
-                aes.GenerateKey(); 
-                aes.GenerateIV();
-                
-                return Ok(new 
-                { 
-                    key = Convert.ToBase64String(aes.Key), 
-                    iv = Convert.ToBase64String(aes.IV) 
-                }); 
-            } 
-        }
-        catch (Exception ex) 
+        try
         {
-                return StatusCode(500, $"Failed to generate encryption configuration: {ex.Message}"); 
-        } 
+            // Generate the shared key and IV only once
+            if (_sharedKey == null || _sharedIV == null)
+            {
+                lock (_lock)
+                {
+                    if (_sharedKey == null || _sharedIV == null)
+                    {
+                        using (var aes = Aes.Create())
+                        {
+                            aes.GenerateKey();
+                            aes.GenerateIV();
+
+                            _sharedKey = Convert.ToBase64String(aes.Key);
+                            _sharedIV = Convert.ToBase64String(aes.IV);
+                        }
+                    }
+                }
+            }
+
+            return Ok(new
+            {
+                key = _sharedKey,
+                iv = _sharedIV
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Failed to generate encryption configuration: {ex.Message}");
+        }
     }
 }
