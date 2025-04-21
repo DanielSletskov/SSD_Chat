@@ -21,31 +21,16 @@ Two agents uses the chat for discussing confidential infiltration tactics in a s
 ## App in use 
 After the connection is setup use any browser to display the chat.  
 Then connect to the same URL in a new tab.  
-![image](https://github.com/user-attachments/assets/aee75776-db21-4014-b35a-350d16ef519c)  
 These two windows can now safely chat with eachother.  
-![image](https://github.com/user-attachments/assets/9c1db473-a994-4322-8ded-f863cec27790)  
-  
+![image](https://github.com/user-attachments/assets/b86c52c0-a001-4c31-b31b-4384577a7275)
 
 ## What security measures are used in this chat  
   
-1. AES Encryption
-Each message is encrypted and decrypted using AES encryption in CBC mode(chipher block chaining) to ensure cipher text uniqueness with the use of IV(Initialization Vector). 
-
-2. Dynamic/random IVs
-By using a random IV generator for each message and by the IV being prepended to the ciphertext so a receiver can extract and use it for decryption strengens overall message-encryption.
- 
-3. Sessions-baed Keys and IV storage
-By using session-based keys it limit possible exposure for XSS attacks.
-
-4. Secure key Fetching
-By fetching encryption key from a secure endpoint and by keeping key delivery spearate from code execution it lessen possible risks.
-
-5. Fallback Loggin setup 
-By setting places when is the application fail it will give a specifiv respone it will ease future reperation of any errors.  
-
-6. Controlled Signalr hub connection
-By setting up he chat hub son only a limited amount of people can access and with no harcoded credentials it chech any risk for possible abuse.  
+1. AES Encryption - Using CryptoJS's AES implementation for encrypting messages
+2. Session-based Key Storage - Storing the encryption key in the browser's sessionStorage
+3. End-to-End Encryption - Messages are encrypted on the sender's device and only decrypted on the recipient's device
+4. Transport Security - Assuming SignalR is running over HTTPS, which adds transport layer security
 
 ## End notes
 
-I know the set is the same but when I try to execute dotnet run without for moving to the specified location I get an error.  
+I know the setup is the same but when I try to execute dotnet run without for moving to the specified location I get an error.  
