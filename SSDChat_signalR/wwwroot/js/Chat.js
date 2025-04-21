@@ -18,9 +18,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 // SignalR receive handler
 connection.on("ReceiveMessage", function (user, encryptedMsg) {
-    console.log("Received message: encryptedMsg", encryptedMsg);
     const decrypted = DecryptMessage(encryptedMsg);
-    console.log("reveice decrypted is" + decrypted);
     const li = document.createElement("li");
     li.textContent = `${user}: ${decrypted}`;
     document.getElementById("ChatMessages").appendChild(li);
@@ -125,24 +123,12 @@ function DecryptMessage(encryptedMessage) {
     console.log("encrypted message is:", encryptedMessage);
     try {
         const keyStr = sessionStorage.getItem("encryptionKey");
-        console.log("Raw key string from storage:", keyStr);
-
         const key = getSessionKey();
-        console.log("Parsed key:", key);
-
         const ivStr = sessionStorage.getItem("encryptionIV");
-        console.log("Raw IV string from storage:", ivStr);
-
         const iv = CryptoJS.enc.Base64.parse(ivStr);
-        console.log("Parsed IV:", iv);
-
         // Decrypt in separate steps to identify where it fails
         const decryptedBytes = CryptoJS.AES.decrypt(encryptedMessage, key, { iv: iv });
-        console.log("Decrypted bytes:", decryptedBytes);
-
         const decryptedStr = decryptedBytes.toString(CryptoJS.enc.Utf8);
-        console.log("Decrypted message:", decryptedStr);
-
         return decryptedStr;
         
     } catch (err) {
