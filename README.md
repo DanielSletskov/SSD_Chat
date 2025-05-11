@@ -25,11 +25,19 @@ These two windows can now safely chat with eachother.
 ![image](https://github.com/user-attachments/assets/b86c52c0-a001-4c31-b31b-4384577a7275)
 
 ## What security measures are used in this chat  
+It was chosen to use a razor
   
 1. AES Encryption - Using CryptoJS's AES implementation for encrypting messages
-2. Session-based Key Storage - Storing the encryption key in the browser's sessionStorage
-3. End-to-End Encryption - Messages are encrypted on the sender's device and only decrypted on the recipient's device
-4. Transport Security - Assuming SignalR is running over HTTPS, which adds transport layer security
+2. Cryptographically secure random key generation: The generateRandomKey() function uses window.crypto.getRandomValues() to generate cryptographically strong random values for keys.
+3. Key Derivation Function (KDF): The code implements PBKDF2 through the deriveKey() function to strengthen encryption keys with:  
+1000 iterations  
+SHA-256 hashing algorithm  
+256-bit key size  
+A salt value ("ChatSalt123")  
+4. Initialization Vector (IV): The encryption uses IVs stored in session storage for AES encryption.
+5. Session storage for keys: Encryption keys and IVs are stored in the browser's sessionStorage, which persists only for the current session and is cleared when the browser closes.
+6. Separate key management: The application fetches encryption configuration from the server via /api/Encryption/getEncryptionConfig API
+7. SignalR for secure real-time communication: The code uses SignalR for real-time messaging which typically provides transport layer security.
 
 ## End notes
 
