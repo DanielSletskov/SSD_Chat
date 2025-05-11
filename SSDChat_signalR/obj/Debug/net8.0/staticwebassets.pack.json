@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\SSDChat_signalR.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\css\\chatstyle.css",
+      "PackagePath": "staticwebassets\\css\\chatstyle.css"
+    },
+    {
       "Id": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

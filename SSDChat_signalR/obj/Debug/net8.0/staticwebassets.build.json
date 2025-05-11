@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZC8OOG0E37f3RcC8vuprbyrqVGamMaePDzLOS1dZ7lQ=",
+  "Hash": "bqP+e/kApUCt8f2NYeuAqsdqNhOrgUQ+hQnbEtH7lso=",
   "Source": "SSDChat_signalR",
   "BasePath": "_content/SSDChat_signalR",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SSDChat_signalR.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\css\\chatstyle.css",
+      "SourceId": "SSDChat_signalR",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\",
+      "BasePath": "_content/SSDChat_signalR",
+      "RelativePath": "css/chatstyle.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\chatstyle.css"
     },
     {
       "Identity": "C:\\Users\\Danie\\RiderProjects\\SecureChatSSD\\SSD_Chat\\SSDChat_signalR\\wwwroot\\css\\site.css",
